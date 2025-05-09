@@ -8,30 +8,36 @@ import { Products } from "./components/Products";
 export function App() {
   const [products, setProducts] = useState(initialProducts);
   const [isCart, setIsCart] = useState(false);
-  //const pcart = products.filter((product) => product.inCart === true);
-  const [cartProducts, setCartProducts] = useState();
+  const pcart = products.filter((product) => product.inCart === true);
+  const [cartProducts, setCartProducts] = useState(pcart);
   // const allProducts = products.filter((product) => product.inCart === false);
-  const allProducts = products.filter((product) => product);
+  let allProducts = products.filter((product) => product);
   const [product, setProduct] = useState();
 
   let cartOk = cartProducts?.length;
 
   function handlerRemoveCart(serial) {
-    alert(serial);
+    //alert(serial);
 
     let all = cartProducts?.map((p) => p).filter((p) => p.serial !== serial);
+    products[serial - 1].cart = 0;
     setCartProducts(all);
+    setProducts(products);
   }
 
   function handlerAddCart() {
     product.inCart = true;
 
     if (cartOk) {
-      cartProducts.map(
+      /*cartProducts.map(
         (p, id) =>
           p.serial !== product.serial &&
           setCartProducts([...cartProducts, product])
-      );
+      );*/
+
+      products[product.id].inCart = true;
+      let all = products.filter((product) => product.inCart === true);
+      setCartProducts(all);
     } else {
       setCartProducts([product]);
     }
@@ -54,7 +60,9 @@ export function App() {
             <CartButton handler={hideCart}>Hide Cart</CartButton>
             {cartOk ? (
               <Carts
-                products={cartProducts}
+                cartProducts={cartProducts}
+                products={products}
+                setProducts={setProducts}
                 setCartProducts={setCartProducts}
                 setProduct={setProduct}
                 handlerRemoveCart={handlerRemoveCart}
@@ -68,6 +76,7 @@ export function App() {
         {!isCart && (
           <div>
             <CartButton handler={showCart}>Show Cart</CartButton>
+            <br></br>
             <Products
               products={allProducts}
               prod={product}

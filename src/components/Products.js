@@ -6,7 +6,7 @@ export function Products({ products, prod, handlerAddCart, setProduct }) {
   const [num1, setNum1] = useState(1);
   const [num2, setNum2] = useState(3);
   const Products = products.filter(
-    (product) => product.id >= num1 && product.id <= num2
+    (product) => product.serial >= num1 && product.serial <= num2
   );
   const [filteredProducts, setFilteredProducts] = useState(Products);
   const [isOpen, setIsOpen] = useState(false);
@@ -18,20 +18,20 @@ export function Products({ products, prod, handlerAddCart, setProduct }) {
       setNum1(n1);
       setNum2(n2);
       const Products = products.filter(
-        (product) => product.id >= n1 && product.id <= n2
+        (product) => product.serial >= n1 && product.serial <= n2
       );
       setFilteredProducts(Products);
     }
   }
 
   function handleNext() {
-    if (num2 < products.length - 1) {
+    if (num2 < products.length) {
       const n1 = num1 + 3;
       const n2 = num2 + 3;
       setNum1(n1);
       setNum2(n2);
       const Products = products.filter(
-        (product) => product.id >= n1 && product.id <= n2
+        (product) => product.serial >= n1 && product.serial <= n2
       );
       setFilteredProducts(Products);
     }
@@ -40,7 +40,8 @@ export function Products({ products, prod, handlerAddCart, setProduct }) {
   return (
     <>
       <div>
-        <div align="center">
+        <br></br>
+        <div align="center" className={isOpen ? "selected" : ""}>
           {isOpen ? (
             <>
               <Product
