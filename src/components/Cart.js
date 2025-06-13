@@ -17,7 +17,7 @@ export function Cart({
     e.preventDefault();
 
     //let prod = product;
-    alert(e.target.value);
+    //alert(e.target.value);
     if (prod.count >= Number(e.target.value) && Number(e.target.value) > 0) {
       //prod.count = prod.count - prod.cart;
       prod.cart = e.target.value;

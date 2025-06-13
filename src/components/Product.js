@@ -19,7 +19,7 @@ export function Product({
 
   function handlerClose() {
     setIsOpen(false);
-    setProduct(null);
+    setProduct(prod);
   }
 
   return (

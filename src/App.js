@@ -21,6 +21,7 @@ export function App() {
 
     let all = cartProducts?.map((p) => p).filter((p) => p.serial !== serial);
     products[serial - 1].cart = 0;
+    products[serial - 1].inCart = false;
     setCartProducts(all);
     setProducts(products);
   }
@@ -36,9 +37,11 @@ export function App() {
       );*/
 
       products[product.id].inCart = true;
+      products[product.id].cart += 1;
       let all = products.filter((product) => product.inCart === true);
       setCartProducts(all);
     } else {
+      products[product.id].cart += 1;
       setCartProducts([product]);
     }
   }
